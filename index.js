@@ -1,8 +1,9 @@
-import {isString, isUndefined, isNumber} from "lodash";
-import Validator from "./validator";
-export default errorCodeHander => options => async (ctx, next) => {
+const {isString, isUndefined, isNumber} = require("lodash");
+const Validator = require("./validator");
+module.exports = errorCodeHandler => options => async (ctx, next) => {
 	try{
-		const code = Object.entries(options).map(item => ((type, parameters) => {
+		let code;
+		if(code = Object.entries(options).map(item => ((type, parameters) => {
 			let payload = ({
 				query: ctx.query,
 				params: ctx.params,
@@ -34,12 +35,11 @@ export default errorCodeHander => options => async (ctx, next) => {
 				throw 5009800099;
 			}, {}));
 			return code;
-		})(...item)).find(item => isNumber(item));
+		})(...item)).find(item => isNumber(item))){
+			throw code;
+		}
 	}catch(code){
-		return ctx.body = errorCodeHandler(code);
-	}
-	if(code){
-		return ctx.body = errorCodeHandler(code);
+		return ctx.body = errorCodeHandler(ctx, code);
 	}
 	await next();
 };

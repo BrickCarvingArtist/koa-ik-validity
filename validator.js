@@ -1,5 +1,5 @@
-import {isPlainObject, isNumber} from "lodash";
-export default {
+const {isPlainObject, isNumber} = require("lodash");
+module.exports = {
 	reg: {
 		tel: {
 			exp: /^1[3-9]\d{9}$/,
@@ -33,7 +33,7 @@ export default {
 	_test(key, value, isPlain){
 		const expSetting = this.reg[key];
 		if(!expSetting){
-			throw new Error(`Sorry, unable to validate "${key}".`);
+			throw 5009800097;
 		}
 		let result = expSetting.exp.test(value);
 		if(result || isPlain){
@@ -45,7 +45,7 @@ export default {
 	test(parameterPairs){
 		let result = {};
 		if(!isPlainObject(parameterPairs)){
-			throw new Error("Wrong parameter pairs to test.");
+			throw 5009800099;
 		}
 		for(let i in parameterPairs){
 			let value = parameterPairs[i]
@@ -55,7 +55,7 @@ export default {
 	},
 	testForErrorCode(parameterPairs){
 		if(!isPlainObject(parameterPairs)){
-			throw new Error("Wrong parameter pairs to test.");
+			throw 5009800099;
 		}
 		for(let i in parameterPairs){
 			let result = this._test(i, parameterPairs[i]);
