@@ -26,8 +26,12 @@ module.exports = {
 			code: 5009800007
 		},
 		time: {
-			exp: /\d{13}$/,
+			exp: /^\d{13}$/,
 			code: 5009800008
+		},
+		user: {
+			exp: /^\S{1,12}$/,
+			code: 5009800009
 		}
 	},
 	_test(key, value, isPlain){

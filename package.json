@@ -1,6 +1,6 @@
 {
   "name": "koa-ik-validity",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "a validity middleware for ikindness.cn",
   "main": "index.js",
   "repository": {
