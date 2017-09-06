@@ -32,6 +32,10 @@ module.exports = {
 		user: {
 			exp: /^\S{1,12}$/,
 			code: 5009800009
+		},
+		title: {
+			exp: /^\S{1,40}$/,
+			code: 5009800010
 		}
 	},
 	_test(key, value, isPlain){
