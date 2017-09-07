@@ -57,7 +57,7 @@ module.exports = {
 		}
 		for(let i in parameterPairs){
 			let value = parameterPairs[i]
-			result[i] = this._test(i, value, "plain");
+			result[i] = this._test(i, value, 1);
 		}
 		return result;
 	},
