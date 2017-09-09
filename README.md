@@ -29,7 +29,7 @@ export default Validity((ctx, {code, comment}) => {
 	//这里必须return掉，验证都不通过了自然不再继续后续的流程，否则你何苦校验半天
 	return ctx.body = {
 		code,
-		message: `${comment ? `${comment}有误，` : ""}${ERROR_CODE(code)}`
+		message: `${comment ? `${comment}有误，` : ""}${ERROR_CODE[code]}`
 	};
 });
 ```
