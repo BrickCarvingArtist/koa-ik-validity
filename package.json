@@ -1,22 +1,28 @@
 {
   "name": "koa-ik-validity",
-  "version": "0.0.10",
-  "description": "a validity middleware for ikindness.cn",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BrickCarvingArtist/koa-ik-validity.git"
-  },
-  "scripts": {},
+  "version": "0.1.0",
   "keywords": [
     "validity",
     "validate"
   ],
-  "author": "BrickCarvingArtist",
-  "license": "MIT",
+  "description": "a validity middleware for ikindness.cn",
+  "author": {
+    "name": "BrickCarvingArtist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrickCarvingArtist/koa-ik-validity.git"
+  },
+  "homepage": "https://github.com/BrickCarvingArtist/koa-ik-validity#readme",
+  "bugs": {
+    "url": "https://github.com/BrickCarvingArtist/koa-ik-validity/issues"
+  },
+  "main": "index.js",
+  "scripts": {},
   "dependencies": {
-    "lodash": "^4.17.4",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-0": "^6.24.1"
-  }
+    "babel-preset-stage-0": "^6.24.1",
+    "lodash": "^4.17.4"
+  },
+  "license": "MIT"
 }

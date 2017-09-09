@@ -1,45 +1,46 @@
 const {isString, isUndefined, isNumber} = require("lodash");
+const {
+	unable,
+	source,
+	keyValues
+} = require("./table");
 const Validator = require("./validator");
 module.exports = errorCodeHandler => options => async (ctx, next) => {
 	try{
-		let code;
-		if(code = Object.entries(options).map(item => ((type, parameters) => {
+		let result;
+		if(result = Object.entries(options).map(item => ((type, parameters) => {
 			let payload = ({
 				query: ctx.query,
 				params: ctx.params,
 				body: ctx.request.body
 			})[type];
 			if(!payload){
-				throw 5009800098;
+				throw table.source;
 			}
-			const code = Validator.testForErrorCode(parameters.reduce((parameterPairs, key) => {
-				if(isString(key)){
-					return Object.assign({
-						[key]: payload[key]
-					}, parameterPairs);
-				}
+			return Validator.testForErrorCode(parameters.reduce((parameterPairs, key) => {
 				const {
 					name,
 					alias = name,
-					required = true
+					required = true,
+					comment = "信息"
 				} = key,
 					value = payload[name];
 				if(required && name || (!required && !isUndefined(value))){
 					return Object.assign({
-						[alias]: value
+						[alias]: value,
+						comment
 					}, parameterPairs);
 				}
 				if(!required && !value){
 					return parameterPairs;
 				}
-				throw 5009800099;
+				throw keyValues;
 			}, {}));
-			return code;
-		})(...item)).find(item => isNumber(item))){
-			throw code;
+		})(...item)).find(({code}) => isNumber(code))){
+			throw result;
 		}
-	}catch(code){
-		return ctx.body = errorCodeHandler(ctx, code);
+	}catch(result){
+		return ctx.body = errorCodeHandler(ctx, result);
 	}
 	await next();
 };
