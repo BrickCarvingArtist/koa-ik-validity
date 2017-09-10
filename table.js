@@ -59,7 +59,7 @@ const table = {
 	},
 	source: {
 		code: 5009800098,
-		message: "数据来源类别(query,params,body)设置有误"
+		message: "数据来源类别(query,params,body)或其值设置有误"
 	},
 	keyValues: {
 		code: 5009800099,

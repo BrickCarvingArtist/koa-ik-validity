@@ -1,12 +1,14 @@
-const {isString, isUndefined, isNumber} = require("lodash");
+const {isUndefined, isArray, isNumber, isPlainObject} = require("lodash");
 const {
-	unable,
 	source,
 	keyValues
 } = require("./table");
 const Validator = require("./validator");
 module.exports = errorCodeHandler => options => async (ctx, next) => {
 	try{
+		if(isUndefined(options)){
+			throw keyValues;
+		}
 		let result;
 		if(result = Object.entries(options).map(item => ((type, parameters) => {
 			let payload = ({
@@ -14,10 +16,13 @@ module.exports = errorCodeHandler => options => async (ctx, next) => {
 				params: ctx.params,
 				body: ctx.request.body
 			})[type];
-			if(!payload){
-				throw table.source;
+			if(!payload || !isArray(parameters)){
+				throw source;
 			}
 			return Validator.testForErrorCode(parameters.reduce((parameterPairs, key) => {
+				if(!isPlainObject(key)){
+					throw source;
+				}
 				const {
 					name,
 					alias = name,
@@ -25,10 +30,12 @@ module.exports = errorCodeHandler => options => async (ctx, next) => {
 					comment = "信息"
 				} = key,
 					value = payload[name];
-				if(required && name || (!required && !isUndefined(value))){
+				if((required && name) || (!required && !isUndefined(value))){
 					return Object.assign({
-						[alias]: value,
-						comment
+						[alias]: {
+							value,
+							comment
+						}
 					}, parameterPairs);
 				}
 				if(!required && !value){

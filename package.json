@@ -1,6 +1,6 @@
 {
   "name": "koa-ik-validity",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "keywords": [
     "validity",
     "validate"
@@ -18,11 +18,20 @@
     "url": "https://github.com/BrickCarvingArtist/koa-ik-validity/issues"
   },
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
   "dependencies": {
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-0": "^6.24.1",
     "lodash": "^4.17.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "mocha": "^3.5.0",
+    "node-fetch": "^1.7.3"
+  }
 }

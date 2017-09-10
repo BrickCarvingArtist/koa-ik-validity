@@ -1,18 +1,21 @@
-const {isPlainObject, isNumber} = require("lodash");
+const {isPlainObject, isUndefined, isNumber} = require("lodash");
 const table = require("./table");
 module.exports = {
-	table,
 	_test(key, value, isPlain){
-		const {table} = this;
 		const expSetting = table[key];
+		let result;
 		if(!expSetting){
-			throw table.unable;
+			result = table.unable.code;
+		}else if(isUndefined(value)){
+			result = table.required.code;
+		}else if(value === ""){
+			result = table.notEmpty.code;
+		}else{
+			result = expSetting.exp.test(value);
 		}
-		let result = expSetting.exp.test(value);
-		if(result || isPlain){
-			return result;
+		if(isPlain){
+			return !isNumber(result) || result;
 		}
-		value || (result = [table.required.code, table.notEmpty.code][+(value === "")]);
 		return result || expSetting.code;
 	},
 	test(parameterPairs){
@@ -22,7 +25,7 @@ module.exports = {
 		}
 		for(let i in parameterPairs){
 			let value = parameterPairs[i]
-			result[i] = this._test(i, value, "plain");
+			result[i] = this._test(i, value, 1);
 		}
 		return result;
 	},
@@ -31,11 +34,15 @@ module.exports = {
 			throw table.keyValues;
 		}
 		for(let i in parameterPairs){
-			const code = this._test(i, parameterPairs[i]);
+			const {
+				value,
+				comment
+			} = parameterPairs[i],
+				code = this._test(i, value);
 			if(isNumber(code)){
 				return {
 					code,
-					comment: parameterPairs.comment
+					comment
 				};
 			}
 		}
