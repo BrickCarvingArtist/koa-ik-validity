@@ -4,7 +4,7 @@
 npm install koa-ik-validity --save
 ```
 
-### 测试
+### 测试
 
 ```bash
 npm install & npm test
