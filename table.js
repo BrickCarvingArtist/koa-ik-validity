@@ -2,11 +2,13 @@ const {fromPairs} = require("lodash");
 const table = {
 	required: {
 		code: 5009800000,
-		message: "缺少查询字段"
+		message: "缺少查询字段",
+		exp: /^undefined$/
 	},
 	notEmpty: {
 		code: 5009800001,
-		message: "查询字段的值不能为空"
+		message: "查询字段的值不能为空",
+		exp: /^.+$/m
 	},
 	tel: {
 		code: 5009800002,
